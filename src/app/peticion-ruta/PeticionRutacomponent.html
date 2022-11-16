@@ -1,0 +1,34 @@
+<div fxLayout="column">
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="space-around center"
+    fxLayoutGap="30px"
+  >
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Hora De La Ruta</mat-label>
+        <input matInput type="datetime-local" [(ngModel)]="dateTimeRequest" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Punto Origen</mat-label>
+        <input matInput [(ngModel)]="originPoint" />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Punto Destino</mat-label>
+        <input matInput [(ngModel)]="finishPoint" />
+      </mat-form-field>
+    </p>
+  </div>
+
+  <div fxLayoutAlign="end center" fxLayoutGap="25px">
+    <button mat-raised-button color="warn" (click)="createRouteRequest()">
+      RegistrarPeticion
+    </button>
+    <button mat-raised-button color="blue" mat-dialog-close>Cerrar</button>
+  </div>
+</div>

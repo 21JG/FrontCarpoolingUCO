@@ -1,0 +1,42 @@
+<!-- Toolbar -->
+<div
+  style="width: 100%; height: 100%"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <div class="h-100" class="toolbar" role="banner">
+    <img width="60" alt="UCO_Logo" src="../favicon.ico" />
+    <span>UCOCarpooling</span>
+    <div class="spacer"></div>
+  </div>
+  <br />
+  <div style="width: 40%; height: 100%" fxLayoutAlign="center center">
+    <mat-card
+      style="width: 100%; height: 50%"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+    >
+      <mat-form-field>
+        <mat-label>Id</mat-label>
+        <input matInput type="email" [(ngModel)]="id" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>contraseña</mat-label>
+        <input matInput type="password" [(ngModel)]="password" />
+      </mat-form-field>
+      <br /><br />
+      <div>
+        <button
+          mat-raised-button
+          style="background-color: #216606; color: white"
+          (click)="login()"
+        >
+          Iniciar sesión
+        </button>
+      </div>
+      <div fxLayoutAlign="center start">
+        <a (click)="openRegisterDialog()">Registarse?</a>
+      </div>
+    </mat-card>
+  </div>
+</div>

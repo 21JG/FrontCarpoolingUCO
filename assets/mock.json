@@ -1,0 +1,90 @@
+{
+  "costumers": [
+    {
+      "id": 1,
+      "name": "Carlos",
+      "lastname": "Puerta",
+      "phone": 123456789
+    },
+    {
+      "id": 2,
+      "name": "Manuel",
+      "lastname": "Marin",
+      "phone": 123456789
+    },
+    {
+      "id": 3,
+      "name": "Jarod",
+      "lastname": "Herrera",
+      "phone": 123456789
+    },
+    {
+      "id": 4,
+      "name": "Gabriel",
+      "lastname": "Gallego",
+      "phone": 123456789
+    },
+    {
+      "id": 5,
+      "name": "Federico",
+      "lastname": "Zapata",
+      "phone": 123456789
+    },
+    {
+      "id": 6,
+      "name": "Jhon",
+      "lastname": "Perez",
+      "phone": 123456789
+    },
+    {
+      "id": 7,
+      "name": "David",
+      "lastname": "Boris",
+      "phone": 123456789
+    }
+  ],
+  "requestRoutes": [
+    {
+      "id": 1,
+      "serviceRequestTime": "12:30",
+      "serviceRequestDate": "2022-11-15",
+      "customer": {
+        "id": 1,
+        "name": "Carlos",
+        "lastname": "Puerta",
+        "phone": 123456789
+      },
+      "status": "Activo",
+      "routeRequestOrigin": "Rionegro",
+      "routeRequestEnd": "El carmen"
+    },
+    {
+      "id": 2,
+      "routeRequestEnd": "marinilla",
+      "routeRequestOrigin": "Medellín",
+      "customer": {
+        "id": 4,
+        "name": "Gabriel",
+        "lastname": "Gallego",
+        "phone": 123456789
+      },
+      "serviceRequestDate": "2022-11-18",
+      "serviceRequestTime": "11:56",
+      "status": "pendiente"
+    },
+    {
+      "id": 3,
+      "routeRequestEnd": "uco",
+      "routeRequestOrigin": "porvenir",
+      "customer": {
+        "id": 5,
+        "name": "Federico",
+        "lastname": "Zapata",
+        "phone": 123456789
+      },
+      "serviceRequestDate": "2022-11-12",
+      "serviceRequestTime": "12:12",
+      "status": "pendiente"
+    }
+  ]
+}
