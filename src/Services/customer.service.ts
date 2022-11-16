@@ -10,13 +10,12 @@ import {
   providedIn: 'root',
 })
 export class CustomerService {
-  DOMAIN: string = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) {}
 
   getClientById(id: String): Observable<ResponseEntityModel<CustomerModel>> {
     return this.http.get<ResponseEntityModel<CustomerModel>>(
-      `${this.DOMAIN}carpooling/customer/byid/${id}`
+      `carpooling/customer/byid/${id}`
     );
   }
   createCustomer(requestBody: CustomerModel): Observable<any> {
