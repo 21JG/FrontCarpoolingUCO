@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 export interface RouteRequestDTOModel {
-  id?: number;
+  id?: string;
   serviceRequestTime?: string;
   serviceRequestDate?: string;
   customer?: CustomerModel;

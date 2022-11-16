@@ -4,6 +4,7 @@ import { CustomerModel, DriverModel } from 'src/model/route-request.model';
 import { CustomerService } from 'src/Services/customer.service';
 import { DriverService } from 'src/Services/driver.service';
 import {FormControl} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
 const { v4: uuid } = require('uuid');
 
 
@@ -31,7 +32,8 @@ export class RegisterDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<RegisterDialogComponent>,
     private customerService: CustomerService,
-    private driverService: DriverService
+    private driverService: DriverService,
+    private toaster:ToastrService
   ) {}
 
   ngOnInit(): void {}
@@ -71,10 +73,19 @@ export class RegisterDialogComponent implements OnInit {
         secondName: this.secondName,
         secondSurname: this.secondSurname,
       };
-      this.customerService.createCustomer(requestBody).subscribe((response) => {
-        console.log('Se creó exitosamente');
-        this.dialogRef.close();
-      });
+      this.customerService.createCustomer(requestBody).subscribe(
+          (res) => {
+            for(let i =0;i<res.messages?.length;i=i+1){
+              this.toaster.success(res.messages[i]?.conten);
+            }
+          },
+          (error) => {
+            for(let i =0;i<error.error?.messages?.length;i=i+1){
+              this.toaster.error(error.error?.messages[i]?.content);
+              console.log(error.error?.messages[i]?.content);
+            }
+          }
+      );
     }
   }
 }

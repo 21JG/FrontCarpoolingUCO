@@ -13,6 +13,8 @@ import { DialogData } from 'src/model/dialog-data.model';
 import { CustomerService } from 'src/Services/customer.service';
 import { PeriodicElement } from 'src/model/periodic-element.model';
 import { IdService } from 'src/Services/id.service';
+import {ToastrService} from "ngx-toastr";
+const { v4: uuid } = require('uuid');
 
 @Component({
   selector: 'peticion-ruta',
@@ -26,7 +28,8 @@ export class PeticionRutaComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private routeRequestService: RouteRequestService
+    private routeRequestService: RouteRequestService,
+    private toaster:ToastrService
   ) {}
 
   openDialog() {
@@ -43,8 +46,14 @@ export class PeticionRutaComponent implements OnInit {
   }
   getRouteRequest() {
     this.routeRequestService.getAllRouteRequest().subscribe((res) => {
-      this.requestList = res.data;
-    });
+          this.requestList = res.data;
+        },
+        (error) => {
+          for(let i =0;i<error.error?.messages?.length;i=i+1){
+            this.toaster.error(error.error?.messages[i]?.content);
+            console.log(error.error?.messages[i]?.content);
+          }
+        });
   }
 
   title = 'CarpoolingUCO';
@@ -59,7 +68,7 @@ export class PeticionRutaComponent implements OnInit {
   templateUrl: './PeticionRutacomponent.html',
 })
 export class DialogDataExampleDialog implements OnInit {
-  newId: number = 0;
+  newId: string = uuid();
   costumerList: CustomerModel[] = [];
   dateTimeRequest: string = '';
   originPoint: string = '';
@@ -71,12 +80,13 @@ export class DialogDataExampleDialog implements OnInit {
     private dialogRef: MatDialogRef<DialogDataExampleDialog>,
     private routeRequestService: RouteRequestService,
     private customerService: CustomerService,
-    private idService: IdService
+    private idService: IdService,
+    private toaster:ToastrService
   ) {}
 
   createRouteRequest() {
     let bodyRequest: RouteRequestDTOModel = {
-      id: this.newId,
+      id:this.newId,
       routeRequestEnd: this.finishPoint,
       routeRequestOrigin: this.originPoint,
       customer: this.costumer,
@@ -84,15 +94,17 @@ export class DialogDataExampleDialog implements OnInit {
       serviceRequestTime: this.dateTimeRequest.split('T')[1],
       status: this.status,
     };
-    console.log(bodyRequest);
     this.routeRequestService.createNewRouteRequest(bodyRequest).subscribe(
       (res) => {
-        console.log('Se creó correctamente');
-        this.dialogRef.close('created');
+        for(let i =0;i<res.messages?.length;i=i+1){
+          this.toaster.success(res.messages[i]?.content);
+        }
       },
       (error) => {
-        console.error('Ocurrió un error');
-        console.log(error);
+        for(let i =0;i<error.error?.messages?.length;i=i+1){
+          this.toaster.error(error.error?.messages[i]?.content);
+          console.log(error.error?.messages[i]?.content);
+        }
       }
     );
   }
