@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {ToastrModule} from "ngx-toastr";
+import {LoginGuard} from "./guards/login-guard.service";
 
 @NgModule({
   declarations: [AppComponent],

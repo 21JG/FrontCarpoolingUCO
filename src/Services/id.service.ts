@@ -6,6 +6,6 @@ import { CustomerModel } from 'src/model/route-request.model';
   providedIn: 'root',
 })
 export class IdService {
-  id: BehaviorSubject<CustomerModel> = new BehaviorSubject({});
+  id: BehaviorSubject<CustomerModel> = new BehaviorSubject(undefined);
   constructor() {}
 }

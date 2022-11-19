@@ -13,3 +13,8 @@
 .w-100{
   width: 100%;
 }
+.footer{
+  position: fixed;
+  left: 20px;
+  bottom: 30px;
+}

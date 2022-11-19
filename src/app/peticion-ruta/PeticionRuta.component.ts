@@ -33,11 +33,7 @@ export class PeticionRutaComponent implements OnInit {
   ) {}
 
   openDialog() {
-    let dialogRef = this.dialog.open(DialogDataExampleDialog, {
-      data: {
-        animal: 'panda',
-      },
-    });
+    let dialogRef = this.dialog.open(DialogDataExampleDialog);
     dialogRef.afterClosed().subscribe((response) => {
       if (response == 'created') {
         this.getRouteRequest();
@@ -76,7 +72,6 @@ export class DialogDataExampleDialog implements OnInit {
   costumer: CustomerModel = {};
   status: string = 'pendiente';
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<DialogDataExampleDialog>,
     private routeRequestService: RouteRequestService,
     private customerService: CustomerService,
@@ -91,7 +86,7 @@ export class DialogDataExampleDialog implements OnInit {
       routeRequestOrigin: this.originPoint,
       customer: this.costumer,
       serviceRequestDate: this.dateTimeRequest.split('T')[0],
-      serviceRequestTime: this.dateTimeRequest.split('T')[1],
+      serviceRequestTime: `${this.dateTimeRequest.split('T')[1]}:00`,
       status: this.status,
     };
     this.routeRequestService.createNewRouteRequest(bodyRequest).subscribe(
@@ -99,6 +94,7 @@ export class DialogDataExampleDialog implements OnInit {
         for(let i =0;i<res.messages?.length;i=i+1){
           this.toaster.success(res.messages[i]?.content);
         }
+        this.dialogRef.close("created");
       },
       (error) => {
         for(let i =0;i<error.error?.messages?.length;i=i+1){

@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PeticionRutaComponent } from './peticion-ruta/PeticionRuta.component';
+import {LoginGuard} from "./guards/login-guard.service";
 
 const routes: Routes = [
   { path: '', redirectTo: 'carpooling/login', pathMatch: 'full' },
   { path: 'carpooling', redirectTo: 'carpooling/login', pathMatch: 'full' },
   {
     path: 'carpooling',
+
     children: [
       {
         path: 'request',
+        canActivate: [LoginGuard],
         loadChildren: () =>
           import('./peticion-ruta/PeticionRuta.module').then(
             (m) => m.PeticionRutaModule
@@ -36,5 +39,6 @@ const routes: Routes = [
     }),
   ],
   exports: [RouterModule],
+  providers:[LoginGuard]
 })
 export class AppRoutingModule {}
